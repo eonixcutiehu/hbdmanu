@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🎂 Happy Birthday, Manu! 🎉 - From EONIX</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI Emoji', cursive, sans-serif;
+            background: linear-gradient(145deg, #fbc2c2 0%, #fda4a4 100%);
+            color: #a52a1a;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 3.2em;
+            background: linear-gradient(135deg, #ffb347, #ff6b6b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 8px rgba(255,215,0,0.3);
+            margin-top: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background-color: rgba(255, 250, 240, 0.92);
+            padding: 25px 20px;
+            border-radius: 60px 60px 40px 40px;
+            box-shadow: 0 20px 35px rgba(255, 80, 40, 0.3);
+            backdrop-filter: blur(1px);
+            border: 2px solid #ffc5a0;
+        }
+
+        .bday-greeting {
+            font-size: 1.5rem;
+            background: #fff0e0;
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 100px;
+            margin: 10px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .gif {
+            width: 130px;
+            height: auto;
+            margin: 8px;
+            border-radius: 30px;
+            background: #ffe1b9;
+            padding: 5px;
+        }
+
+        .game {
+            margin: 30px 0;
+            padding: 18px 12px;
+            background: #fff9f0;
+            border-radius: 50px;
+            box-shadow: 0 8px 20px rgba(255, 100, 50, 0.2);
+            border: 1px solid #ffc0a0;
+        }
+
+        .game h2 {
+            color: #d95b2a;
+            font-size: 1.8rem;
+            margin-top: 0;
+            border-bottom: 3px dotted #ffb485;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .notes {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 550px;
+            margin: 15px auto;
+        }
+
+        textarea {
+            width: 100%;
+            height: 90px;
+            border: 2px solid #ffa26b;
+            border-radius: 28px;
+            padding: 12px 15px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: #fffff2;
+            resize: vertical;
+            transition: 0.2s;
+        }
+
+        textarea:focus {
+            border-color: #ff5722;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.2);
+        }
+
+        button {
+            background: linear-gradient(95deg, #ff8c5a, #ff6a3d);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 8px 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            transform: scale(1.02);
+            background: linear-gradient(95deg, #ff7a44, #ff5722);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        #birthday-message {
+            display: none;
+            font-size: 1.4rem;
+            background: #ffeedd;
+            padding: 20px;
+            border-radius: 70px;
+            margin-top: 25px;
+            border: 3px solid #ffad86;
+        }
+
+        /* Memory Game */
+        .memory-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 450px;
+            margin: 20px auto;
+        }
+
+        .card {
+            width: 85px;
+            height: 85px;
+            background: #ffb27f;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 6px 0 #a1491e;
+        }
+
+        .card.flipped {
+            background: #fff0cc;
+            transform: scale(0.97);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Tic-Tac-Toe */
+        .ttt-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 300px;
+            margin: 20px auto;
+        }
+
+        .ttt-cell {
+            width: 85px;
+            height: 85px;
+            background: #fff3e6;
+            border: 3px solid #ff9f6e;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .ttt-cell.filled {
+            cursor: default;
+            background: #ffefdf;
+        }
+
+        /* Catch Game */
+        .catch-game {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            height: 400px;
+            margin: 15px auto;
+            background: #fee3ca;
+            border-radius: 50px;
+            border: 3px solid #ffa163;
+            overflow: hidden;
+            box-shadow: inset 0 0 0 2px #fff0e0, 0 8px 18px rgba(0,0,0,0.1);
+        }
+
+        .falling-item {
+            position: absolute;
+            top: 0;
+            font-size: 2.3rem;
+            cursor: pointer;
+            transition: top 0.02s linear;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+        }
+
+        @media (max-width: 550px) {
+            .card, .ttt-cell { width: 70px; height: 70px; font-size: 2rem; }
+            .memory-board { gap: 8px; }
+            h1 { font-size: 2.2rem; }
+        }
+        .cake-icon {
+            font-size: 2rem;
+            vertical-align: middle;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #bd6b42;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> Happy Birthday, Manu! </h1>
+        <div class="bday-greeting">
+            🧁 From your brother Eonix (Rishu) with all my love 🧁
+        </div>
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23FFB347'/%3E%3Ctext x='50' y='70' font-size='55' text-anchor='middle' fill='%23fff'%3E🎂%3C/text%3E%3C/svg%3E" alt="birthday cake" class="gif" style="background: #ffdead;">
+        <p>🎉 Welcome to your special birthday arcade! 🎉 <br> Play fun games, write sweet notes, and let's celebrate YOU! 💕</p>
+        
+        <!-- Memory Game: birthday themed -->
+        <div class="game">
+            <h2>🎀 Memory Match: Birthday Delights 🧁🐱</h2>
+            <p>Flip & match pairs of cake, balloons & kitty!</p>
+            <button onclick="shuffleMemory()">🔄 Shuffle & Restart</button>
+            <div class="memory-board" id="memory-board"></div>
+            <p id="memory-status">🎯 Matches: 0 / 6</p>
+        </div>
+        
+        <!-- Tic-Tac-Toe : Sister vs Bro theme -->
+        <div class="game">
+            <h2>✨ Tic-Tac-Toe: Cake 🎂 vs. Balloon 🎈 ✨</h2>
+            <p>You are 🎂 (Cake) — Click the empty spot to win! 🥳</p>
+            <button onclick="resetTTT()">🎲 New Game</button>
+            <div class="ttt-board" id="ttt-board"></div>
+            <p id="ttt-status">💖 Claim the last spot with 🎂 and WIN!</p>
+        </div>
+        
+        <!-- Catch Game: Birthday edition -->
+        <div class="game">
+            <h2>🎁 Catch the Presents & Kitties! 🐱🎈</h2>
+            <p>Tap falling 🎁 (1 point) or 🐱 (3 points). Get 5 points to win birthday surprise!</p>
+            <p id="catch-score">🎀 Score: 0</p>
+            <button onclick="startCatchGame()">🎉 Start Game</button>
+            <button onclick="stopCatchGame()">⏹️ Stop Game</button>
+            <div class="catch-game" id="catch-game"></div>
+        </div>
+        
+        <!-- Notes for Sister - Updated Birthday Questions -->
+        <div class="game">
+            <h2>📝 Birthday messages and questions for Manu 📝</h2>
+            <p>Answer these birthday questions — they mean the world to me! 🎂✨</p>
+            <div class="notes">
+                <textarea id="note1" placeholder="📅 What's a birthday memory that always makes you smile, no matter what?"></textarea>
+                <textarea id="note2" placeholder="💭 What's something you want to achieve or experience in the year ahead (your new birthday year)?"></textarea>
+                <textarea id="note3" placeholder="🥳 What would make this birthday feel truly special and unforgettable for you?"></textarea>
+            </div>
+            <button onclick="sendNotesToTelegram()">📨 Send Your Answers To Eonix📨</button>
+        </div>
+        
+        <!-- Birthday Surprise Button -->
+        <button onclick="showBirthdaySurprise()">🎁 Click for a Heartfelt Birthday Surprise 🎁</button>
+        <div id="birthday-message">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FFC0CB'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='%23ff4d6d'%3E,🧸%3C/text%3E%3C/svg%3E" class="gif" style="background:#ffc2a1;">
+            <p>🎀 Happy Birthday, my dearest sister Manu! 🎀 <br> 
+            You are the sparkle in our friendship. Every game, every question — it's all for you. <br>
+            May your year be filled with endless joy, sweet cakes, and magical moments. <br>
+            I'm so grateful to have you as my sister. You are the best sister! 💕 <br><br>
+            — From Your Brother, Eonix (Rishu)</p>
+            <p>🎂🥳✨ Let's celebrate your today and forever! ✨🥳🎂</p>
+        </div>
+        <footer>🎈 Made with love for Manu 🎈 | enjoy your birthday games & questions!</footer>
+    </div>
+
+    <script>
+        // ---------------------- MEMORY GAME (birthday edition) ----------------------
+        const memoryBoard = document.getElementById('memory-board');
+        const memoryStatus = document.getElementById('memory-status');
+        const birthdayCards = ['🎂', '🎂', '🎈', '🎈', '🐱', '🐱', '🎁', '🎁', '🧁', '🧁', '🎉', '🎉'];
+        let shuffledBirthday = [...birthdayCards];
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        function shuffleMemory() {
+            shuffledBirthday = [...birthdayCards].sort(() => Math.random() - 0.5);
+            memoryBoard.innerHTML = '';
+            flippedCards = [];
+            matchedPairs = 0;
+            memoryStatus.textContent = '🎯 Matches: 0 / 6';
+            shuffledBirthday.forEach((card, index) => {
+                const cardDiv = document.createElement('div');
+                cardDiv.classList.add('card');
+                cardDiv.dataset.index = index;
+                cardDiv.addEventListener('click', flipCard);
+                memoryBoard.appendChild(cardDiv);
+            });
+        }
+
+        function flipCard() {
+            if (flippedCards.length < 2 && !this.classList.contains('flipped')) {
+                this.classList.add('flipped');
+                this.textContent = shuffledBirthday[this.dataset.index];
+                flippedCards.push(this);
+                if (flippedCards.length === 2) {
+                    setTimeout(checkMatch, 800);
+                }
+            }
+        }
+
+        function checkMatch() {
+            if (flippedCards[0].textContent === flippedCards[1].textContent) {
+                matchedPairs++;
+                memoryStatus.textContent = `🎯 Matches: ${matchedPairs} / 6`;
+                if (matchedPairs === 6) {
+                    alert('🎉🎂 YOU MASTERED THE MEMORY GAME! Happy birthday, Manu! 🎂🎉');
+                }
+            } else {
+                flippedCards.forEach(card => {
+                    card.classList.remove('flipped');
+                    card.textContent = '';
+                });
+            }
+            flippedCards = [];
+        }
+        shuffleMemory();
+
+        // ---------------------- TIC TAC TOE ----------------------
+        const tttBoard = document.getElementById('ttt-board');
+        const tttStatus = document.getElementById('ttt-status');
+        let tttCells = ['🎂', '🎈', '🎂', '🎈', '🎂', '🎈', '🎈', '🎈', null];
+
+        function buildTTTBoard() {
+            tttBoard.innerHTML = '';
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('ttt-cell');
+                cell.dataset.index = i;
+                cell.textContent = tttCells[i] || '';
+                if (tttCells[i]) {
+                    cell.classList.add('filled');
+                } else {
+                    cell.addEventListener('click', makeWinningMove);
+                }
+                tttBoard.appendChild(cell);
+            }
+        }
+
+        function makeWinningMove() {
+            const index = this.dataset.index;
+            if (!tttCells[index]) {
+                tttCells[index] = '🎂';
+                this.textContent = '🎂';
+                this.classList.add('filled');
+                if (checkWin('🎂')) {
+                    tttStatus.textContent = '🎂 CAKE WINS! You did it, birthday girl! 🎉';
+                    alert('🥳 Hooray! You won Tic-Tac-Toe! Happy birthday, superstar! 🎂');
+                } else {
+                    tttStatus.textContent = '🎈 Nice move! You are the birthday champion!';
+                }
+                this.removeEventListener('click', makeWinningMove);
+            }
+        }
+
+        function checkWin(player) {
+            const wins = [
+                [0,1,2], [3,4,5], [6,7,8],
+                [0,3,6], [1,4,7], [2,5,8],
+                [0,4,8], [2,4,6]
+            ];
+            return wins.some(combo => combo.every(i => tttCells[i] === player));
+        }
+
+        function resetTTT() {
+            tttCells = ['🎂', '🎈', '🎂', '🎈', '🎂', '🎈', '🎈', '🎈', null];
+            buildTTTBoard();
+            tttStatus.textContent = '💖 Click the empty spot to win with 🎂!';
+        }
+        buildTTTBoard();
+
+        // ---------------------- CATCH GAME ----------------------
+        const catchGameDiv = document.getElementById('catch-game');
+        const catchScoreSpan = document.getElementById('catch-score');
+        let catchScore = 0;
+        let catchGameInterval = null;
+        let catchSpawnInterval = null;
+        let autoWinTimer = null;
+        let isGameActive = false;
+
+        function stopCatchGame() {
+            if (catchGameInterval) clearInterval(catchGameInterval);
+            if (catchSpawnInterval) clearInterval(catchSpawnInterval);
+            if (autoWinTimer) clearTimeout(autoWinTimer);
+            isGameActive = false;
+            catchGameDiv.innerHTML = '';
+        }
+
+        function updateFallingItems() {
+            if (!isGameActive) return;
+            const items = document.querySelectorAll('#catch-game .falling-item');
+            items.forEach(item => {
+                let currentTop = parseFloat(item.style.top);
+                if (isNaN(currentTop)) currentTop = 0;
+                currentTop += 3.5;
+                item.style.top = currentTop + 'px';
+                if (currentTop > 390) {
+                    item.remove();
+                }
+            });
+        }
+
+        function spawnBirthdayItem() {
+            if (!isGameActive) return;
+            const item = document.createElement('div');
+            item.classList.add('falling-item');
+            const isGift = Math.random() > 0.5;
+            item.textContent = isGift ? '🎁' : '🐱';
+            const maxLeft = catchGameDiv.clientWidth - 50;
+            const leftPos = Math.random() * Math.max(10, maxLeft);
+            item.style.left = leftPos + 'px';
+            item.style.top = '0px';
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (!isGameActive) return;
+                if (item.textContent === '🎁') catchScore += 1;
+                else if (item.textContent === '🐱') catchScore += 3;
+                catchScoreSpan.textContent = `🎀 Score: ${catchScore}`;
+                item.remove();
+                if (catchScore >= 5) {
+                    alert('🎁✨ YAY! You caught 5 points! Birthday confetti for you! ✨🎁');
+                    stopCatchGame();
+                    catchScoreSpan.textContent = `🎀 Score: ${catchScore} - GAME WON! 🎉`;
+                }
+            });
+            catchGameDiv.appendChild(item);
+        }
+
+        function startCatchGame() {
+            if (isGameActive) stopCatchGame();
+            catchScore = 0;
+            catchScoreSpan.textContent = '🎀 Score: 0';
+            catchGameDiv.innerHTML = '';
+            isGameActive = true;
+            catchGameInterval = setInterval(updateFallingItems, 45);
+            catchSpawnInterval = setInterval(spawnBirthdayItem, 1300);
+            autoWinTimer = setTimeout(() => {
+                if (isGameActive && catchScore < 5) {
+                    catchScore = 5;
+                    catchScoreSpan.textContent = '🎀 Score: 5';
+                    alert('🎂 Time’s up but you still win! Happy birthday Manu! 🎂');
+                    stopCatchGame();
+                    catchScoreSpan.textContent = '🎀 Score: 5 - WINNER!';
+                }
+            }, 28000);
+        }
+
+        // ---------------------- TELEGRAM NOTES (with new birthday questions) ----------------------
+        async function sendNotesToTelegram() {
+            const botToken = '8514283011:AAEPpE8dXcVsWNbdvpTMIYku3y6_oCnRDJA';
+            const userId = '8254284803';
+            const note1 = document.getElementById('note1').value.trim();
+            const note2 = document.getElementById('note2').value.trim();
+            const note3 = document.getElementById('note3').value.trim();
+
+            if (!note1 && !note2 && !note3) {
+                alert('🎀 Please answer at least one birthday question before sending! 🎀');
+                return;
+            }
+
+            const birthdayMessage = `🎂🎈 SOME SPECIAL QUESTIONS FOR MANU🎈🎂\n\n📅 Memory that makes you smile: ${note1 || "💭 (not answered)"}\n\n💭 Next year goal/experience: ${note2 || "✨ (not answered)"}\n\n🥳 What would make birthday unforgettable: ${note3 || "🎁 (not answered)"}\n\n💖 Sending you tons of love and birthday magic! 💖`;
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: userId,
+                        text: birthdayMessage,
+                    }),
+                });
+                if (response.ok) {
+                    alert('✨ Your answers reached Eonix! Thank you, sis! ✨');
+                } else {
+                    throw new Error('Telegram API error');
+                }
+            } catch (error) {
+                console.error(error);
+                alert('🎀 Could not send via Telegram right now. But your answers are beautiful! You can screenshot them too 🎀');
+            }
+        }
+
+        // Birthday Surprise reveal
+        function showBirthdaySurprise() {
+            const surpriseDiv = document.getElementById('birthday-message');
+            if (surpriseDiv.style.display === 'block') {
+                surpriseDiv.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                surpriseDiv.style.display = 'block';
+                surpriseDiv.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
